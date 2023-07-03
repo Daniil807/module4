@@ -1,0 +1,58 @@
+h1 {
+    color: azure;
+}
+h3{
+    background: rgb(19, 19, 31);
+    color: beige;
+    font-size: 22pt;
+}
+
+.p1{
+    background: rgb(0, 0, 0);
+    font-size: 22pt;
+    color: rgb(255, 255, 255);
+    border: 50px, solid, yellow;
+    border-radius: 20px;
+    margin-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-style: oblique;
+}
+.p2{
+    background: black;
+    font-size: 22pt;
+    border-radius: 20px;
+    color: aqua;
+    margin-top: 30px;
+    padding-left: 30px;
+}
+.p3{
+    background: black;
+    font-size: 22pt;
+    color: blanchedalmond;
+    border-radius: 20px;
+    padding-left: 30px;
+}
+.d1{
+    font-size: 22pt;
+    font-weight: 200;
+    background: black;
+    color: bisque;
+    border-radius: 20px;
+    padding-left: 30px;
+}
+.d2{
+    background: black;
+    color: whitesmoke;
+    font-size: 22pt;
+    border-radius: 20px;
+    padding-left: 30px;
+}
+.p4{
+    background: black;
+    color: white;
+    font-size: 24px;
+    font-style: oblique;
+    text-align: center;
+    text-shadow:3px 4px 5px rgb(0, 165, 0);
+}
