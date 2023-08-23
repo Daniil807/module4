@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block title %}
-Топ продавцов
+Лучшие продавцы
 {% endblock %}
 
 {% block content %}
 <body>
   <ul class="nav nav-pills sticky-top bg-white nav-fill">
     <li class="nav-item">
-      <a class="nav-link"  href="/">
+      <a class="nav-link"  href="{% url 'main-page' %}">
         <span style="font-weight: bold;">Главная</span>
       </a>
     </li>
@@ -18,7 +18,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="advertisement-post.html">
+      <a class="nav-link" href="{% url 'adv-post' %}">
         <span style="font-weight: bold;">Разместить объявление</span>
       </a>
     </li>
@@ -28,17 +28,17 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="login.html">
+      <a class="nav-link" href="{% url 'login' %}">
         <span style="font-weight: bold;">Войти</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="profile.html">
+      <a class="nav-link" href="{% url 'profile' %}">
         <span style="font-weight: bold;">Профиль</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{% url 'logout' %}">
         <span style="font-weight: bold;">Выйти</span>
       </a>
     </li>
