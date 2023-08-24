@@ -11,12 +11,15 @@ def index(request):
 def top_sellers(request):
     return render(request, 'app_advertisement/top-sellers.html')
 
+def advertisement(request):
+    return render(request, 'app_advertisement/advertisement.html')
+
 def advertisement_post(request):
     if request.method == 'POST':
-        form = AdvertisementForm(request.POST)
+        form = AdvertisementForm(request.POST, request.FILES)
         if form.is_valid():
-            advertisement = form.save()
-            advertisement.author = request.user
+            advertisement = Advertisement(**form.cleaned_data)
+            advertisement.user = request.user
             advertisement.save()
             url = reverse('main-page')
             return redirect(url)
