@@ -1,12 +1,29 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
-from django.urls import reverse, reverse_lazy
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.urls import reverse
+from .forms import UserRegister
 
 def profile_view(request):
     return render(request, 'app_auth/profile.html')
 
-@login_required(login_url=reverse_lazy('login'))
+def register_view(request):
+    if request.method == 'GET':
+        form = UserRegister()
+        return render(request, 'app_auth/register.html', {'form': form})    
+   
+    if request.method == 'POST':
+        form = UserRegister(request.POST) 
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'You have singed up successfully.')
+            login(request, user)
+            return redirect('profile')
+        else:
+            return render(request, 'app_auth/register.html', {'form': form})
+
 def login_view(request):
     redirect_url = reverse('profile')
     if request.method == 'GET':

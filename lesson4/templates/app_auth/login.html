@@ -7,27 +7,18 @@
 {% block content %}
   <ul class="nav nav-pills sticky-top bg-white nav-fill">
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'main-page' %}">
+      <a class="nav-link active" aria-current="page" href="/">
         <span style="font-weight: bold;">Главная</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'top-sellers' %}"><span style="font-weight: bold;">Топ продавцов</span>
+      <a class="nav-link" href="{% url 'top-sellers'%}"><span style="font-weight: bold;">Топ продавцов</span>
       </a>
     </li>
+    {% if request.user.is_authenticated %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'adv-post' %}">
         <span style="font-weight: bold;">Разместить объявление</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="register.html">
-        <span style="font-weight: bold;">Регистрация</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'login' %}">
-        <span style="font-weight: bold;">Войти</span>
       </a>
     </li>
     <li class="nav-item">
@@ -40,6 +31,18 @@
         <span style="font-weight: bold;">Выйти</span>
       </a>
     </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'reg' %}">
+        <span style="font-weight: bold;">Регистрация</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'login' %}">
+        <span style="font-weight: bold;">Войти</span>
+      </a>
+    </li>
+    {% endif %}
   </ul>
   {% if error %}
   <div class = "form-label bg-warning" style="margin: 10px 0px;">{{ error }}</div>
@@ -50,7 +53,7 @@
         <div class="col">
           <label class="col-sm-4 col-form-label offset-4">Username</label>
           <div class="col-sm-4 offset-4 w-25">
-            <input name="username" id = 'username' type="text" class="form-control form-control-lg">
+            <input name="username" id = "username" type="text" class="form-control form-control-lg">
           </div>
         </div>
       </div>
@@ -58,7 +61,7 @@
         <div class="col">
           <label class="col-sm-4 col-form-label offset-4">Password</label>
           <div class="col-sm-4 offset-4 w-25">
-            <input name="'password" id="password" type="password" class="form-control form-control-lg">
+            <input name="password" id="password" type="password" class="form-control form-control-lg">
           </div>
         </div>
       </div>

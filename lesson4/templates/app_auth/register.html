@@ -8,7 +8,7 @@
 {% block content %}
   <ul class="nav nav-pills sticky-top bg-white nav-fill">
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link active" aria-current="page" href="/">
         <span style="font-weight: bold;">Главная</span>
       </a>
     </li>
@@ -16,19 +16,10 @@
       <a class="nav-link" href="{% url 'top-sellers'%}"><span style="font-weight: bold;">Топ продавцов</span>
       </a>
     </li>
+    {% if request.user.is_authenticated %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'adv-post' %}">
         <span style="font-weight: bold;">Разместить объявление</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="register.html">
-        <span style="font-weight: bold;">Регистрация</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'login' %}">
-        <span style="font-weight: bold;">Войти</span>
       </a>
     </li>
     <li class="nav-item">
@@ -41,6 +32,18 @@
         <span style="font-weight: bold;">Выйти</span>
       </a>
     </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'reg' %}">
+        <span style="font-weight: bold;">Регистрация</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'login' %}">
+        <span style="font-weight: bold;">Войти</span>
+      </a>
+    </li>
+    {% endif %}
   </ul>
   <div class="container">
   <div class="row">
@@ -51,47 +54,8 @@
     </div>
   </div>
     <form method="post">
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Username</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="text" class="form-control form-control-lg">
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Name</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="text" class="form-control form-control-lg">
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Surname</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="text" class="form-control form-control-lg">
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Password</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="password" class="form-control form-control-lg">
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Password confirmation</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="password" class="form-control form-control-lg">
-            <div class="form-label bg-warning" style="margin: 10px 0px;">Ошибка (если будет)</div>
-          </div>
-        </div>
-      </div>
+      {% csrf_token %}
+      {{ form.as_p }}
       <div class="row mb-3 offset-sm-5">
         <div class="col">
           <button type="submit" class="btn btn-success">Принять</button>
@@ -99,6 +63,4 @@
       </div>
     </form>
   </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}
