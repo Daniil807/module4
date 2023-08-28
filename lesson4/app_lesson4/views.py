@@ -2,17 +2,30 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from .forms import AdvertisementForm
 from .models import Advertisement
+from django.contrib.auth import get_user_model
+from django.db.models import Count
+#https://github.com/skraler/advertisements
+User = get_user_model()
 
 def index(request):
-    advertisements =  Advertisement.objects.all()
-    context = {'advertisements': advertisements}
+    title = request.GET.get('query')
+    if title:
+        advertisements = Advertisement.objects.filter(title__icontains=title)
+    else:
+        advertisements =  Advertisement.objects.all()
+    context = {'advertisements': advertisements,
+               'title': title
+               }
     return render(request, 'app_advertisement/index.html', context)
 
 def top_sellers(request):
-    return render(request, 'app_advertisement/top-sellers.html')
-
-def advertisement(request):
-    return render(request, 'app_advertisement/advertisement.html')
+    users= User.objects.annotate(
+        adv_count=Count('advertisement')
+    ).order_by('-adv_count')
+    context = {
+        'users': users
+    }
+    return render(request, 'app_advertisement/top-sellers.html', context)
 
 def advertisement_post(request):
     if request.method == 'POST':
@@ -27,3 +40,10 @@ def advertisement_post(request):
         form = AdvertisementForm()
     context = {'form' : form}
     return render(request, 'app_advertisement/advertisement_post.html', context)
+
+def redir_adv(request, pk):
+    advertisement = Advertisement.objects.get(id=pk)
+    context = {
+        'advertisement': advertisement
+    }
+    return render(request, 'app_advertisement/advertisement.html', context)

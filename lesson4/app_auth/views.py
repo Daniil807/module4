@@ -1,9 +1,11 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse, reverse_lazy
 from .forms import UserRegister
 
+@login_required(login_url= reverse_lazy('login'))
 def profile_view(request):
     return render(request, 'app_auth/profile.html')
 
@@ -11,7 +13,6 @@ def register_view(request):
     if request.method == 'GET':
         form = UserRegister()
         return render(request, 'app_auth/register.html', {'form': form})    
-   
     if request.method == 'POST':
         form = UserRegister(request.POST) 
         if form.is_valid():

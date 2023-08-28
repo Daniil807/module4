@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import index, top_sellers, advertisement_post, advertisement
+from .views import index, top_sellers, advertisement_post, redir_adv
 
 urlpatterns = [
     path('',index, name='main-page'),
     path('top-sellers/', top_sellers, name= 'top-sellers'),
     path('advertisement-post/', advertisement_post, name='adv-post'),
-    path('advertisement/', advertisement, name='adv')
+    path('advertisement/<int:pk>', redir_adv, name='adv-detail'),
 ]
